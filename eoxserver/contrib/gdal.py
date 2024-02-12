@@ -183,5 +183,6 @@ def config_env(env, fail_on_override=False, reset_old=True):
 
 
 def open_with_env(path, env, shared=True):
+    path = path[0:-2] if path[-2:] == ":0" else path
     with config_env(env, False):
         return OpenShared(path) if shared else Open(path)
