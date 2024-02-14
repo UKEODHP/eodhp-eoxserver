@@ -183,6 +183,12 @@ def config_env(env, fail_on_override=False, reset_old=True):
 
 
 def open_with_env(path, env, shared=True):
-    path = path[0:-2] if path[-2:] == ":0" else path
+    #path = path[0:-2] if path[-2:] == ":0" else path
+    if path.count(":") == 3:
+        string = path.rsplit(":")
+        end_index = string[-1]
+        end_index = "0:" + end_index
+        string[-1] = end_index
+        path = ":".join(string)
     with config_env(env, False):
         return OpenShared(path) if shared else Open(path)

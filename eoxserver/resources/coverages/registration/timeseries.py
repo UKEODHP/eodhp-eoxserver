@@ -269,7 +269,8 @@ def register_time_series(
 
         for dim_name, dim in metadata['arrays'].items():
             if dim_name not in fixed_dimensions:
-                footprint = extent_to_footprint(dim['srs']['wkt'], extent)
+                footprint = extent_to_footprint(metadata['arrays']['clt']['srs']['wkt'], extent)
+                #footprint = extent_to_footprint(dim['srs']['wkt'], extent)
                 break
 
         time_path = '%s:"%s":%s' % (driver_name, vsi_path, time_dim_name)
